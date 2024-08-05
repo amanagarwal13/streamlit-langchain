@@ -56,12 +56,12 @@ df.to_csv('db.csv', index=False)
 # Load data and create index
 loader = CSVLoader(file_path='db.csv')
 data = loader.load()
-embeddings = OpenAIEmbeddings(openai_api_key="sk-proj-AO7jtfmR4fT7qkg6kC7ST3BlbkFJavbDNBl8nFxY88sE8GJj")
+embeddings = OpenAIEmbeddings(openai_api_key="OPEN_API_KEY")
 index_creator = VectorstoreIndexCreator(embedding=embeddings)
 docsearch = index_creator.from_loaders([loader])
 retriever = docsearch.vectorstore.as_retriever()
 
-llm = ChatOpenAI(openai_api_key="sk-proj-AO7jtfmR4fT7qkg6kC7ST3BlbkFJavbDNBl8nFxY88sE8GJj", model_name="gpt-3.5-turbo", temperature=0)
+llm = ChatOpenAI(openai_api_key="OPEN_API_KEY", model_name="gpt-3.5-turbo", temperature=0)
 compressor = LLMChainExtractor.from_llm(llm)
 compression_retriever = ContextualCompressionRetriever(base_compressor=compressor, base_retriever=retriever)
 
