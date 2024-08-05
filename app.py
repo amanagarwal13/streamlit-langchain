@@ -13,7 +13,7 @@ import os
 
 load_dotenv()
 
-OPEN_API_KEY = st.secrets["key"]
+OPEN_API_KEY = st.secrets["DB_TOKEN"]
 
 # Streamlit app title
 st.title("Compliance Measures QA System")
