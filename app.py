@@ -25,14 +25,14 @@ data = loader.load()
 embeddings = OpenAIEmbeddings(openai_api_key= OPEN_API_KEY)
 index_creator = VectorstoreIndexCreator(embedding=embeddings)
 docsearch = index_creator.from_loaders([loader])
-retriever = docsearch.vectorstore.as_retriever()
+
 
 llm = ChatOpenAI(openai_api_key=OPEN_API_KEY, model_name="gpt-3.5-turbo", temperature=0)
 compressor = LLMChainExtractor.from_llm(llm)
-compression_retriever = ContextualCompressionRetriever(base_compressor=compressor, base_retriever=retriever)
+#compression_retriever = ContextualCompressionRetriever(base_compressor=compressor, base_retriever=retriever)
 
 # Create question-answering chain
-chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=compression_retriever, input_key="question")
+chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever = docsearch.vectorstore.as_retriever(), input_key="question")
 
 # User input for the query
 query = st.text_input("Enter your query:")
