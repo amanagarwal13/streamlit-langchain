@@ -13,46 +13,6 @@ from langchain_openai import OpenAI, ChatOpenAI
 st.title("Compliance Measures QA System")
 
 # Function to fetch data from the API
-"""
-def get_table(x, limit=100):
-    url = f"https://nayaone-compass.bubbleapps.io/version-test/api/1.1/obj/{x}"
-    headers = {
-        'Authorization': 'YOUR_API_KEY'
-    }
-    
-    all_results = []
-    cursor = 0
-    
-    while True:
-        params = {
-            'cursor': cursor,
-            'limit': limit
-        }
-        
-        response = requests.get(url, headers=headers, params=params)
-        response_data = response.json()
-        
-        results = response_data["response"]["results"]
-        remaining = response_data["response"]["remaining"]
-        
-        all_results.extend(results)
-        
-        if remaining <= 0:
-            break
-        
-        cursor += limit
-    
-    return pd.DataFrame(all_results)
-
-# Example usage to fetch data and save to CSV
-if 'data' not in st.session_state:
-    st.session_state['data'] = get_table('Vendor', limit=100)
-
-df = st.session_state['data']
-
-# Save to CSV if needed
-df.to_csv('db.csv', index=False)
-"""
 # Load data and create index
 loader = CSVLoader(file_path='db.csv')
 data = loader.load()
@@ -77,5 +37,4 @@ if st.button("Get Answer"):
     st.write(response['result'])
 
 # Display the data fetched
-st.write("Data Fetched from API:")
-st.dataframe(df)
+#st.write("Data Fetched from API:")
