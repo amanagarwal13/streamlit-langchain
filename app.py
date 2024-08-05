@@ -29,7 +29,7 @@ compression_retriever = ContextualCompressionRetriever(base_compressor=compresso
 chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=compression_retriever, input_key="question")
 
 # User input for the query
-query = st.text_input("Enter your query:", "In which outcome category can this be put: Strengthen compliance measures to meet regulatory requirements.")
+query = st.text_input("Enter your query:")
 
 if st.button("Get Answer"):
     # Pass the query to the chain
