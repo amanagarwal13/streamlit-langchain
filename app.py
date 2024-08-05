@@ -13,6 +13,7 @@ from langchain_openai import OpenAI, ChatOpenAI
 st.title("Compliance Measures QA System")
 
 # Function to fetch data from the API
+"""
 def get_table(x, limit=100):
     url = f"https://nayaone-compass.bubbleapps.io/version-test/api/1.1/obj/{x}"
     headers = {
@@ -51,16 +52,16 @@ df = st.session_state['data']
 
 # Save to CSV if needed
 df.to_csv('db.csv', index=False)
-
+"""
 # Load data and create index
 loader = CSVLoader(file_path='db.csv')
 data = loader.load()
-embeddings = OpenAIEmbeddings(openai_api_key="YOUR_OPENAI_API_KEY")
+embeddings = OpenAIEmbeddings(openai_api_key="sk-proj-AO7jtfmR4fT7qkg6kC7ST3BlbkFJavbDNBl8nFxY88sE8GJj")
 index_creator = VectorstoreIndexCreator(embedding=embeddings)
 docsearch = index_creator.from_loaders([loader])
 retriever = docsearch.vectorstore.as_retriever()
 
-llm = ChatOpenAI(openai_api_key="YOUR_OPENAI_API_KEY", model_name="gpt-3.5-turbo", temperature=0)
+llm = ChatOpenAI(openai_api_key="sk-proj-AO7jtfmR4fT7qkg6kC7ST3BlbkFJavbDNBl8nFxY88sE8GJj", model_name="gpt-3.5-turbo", temperature=0)
 compressor = LLMChainExtractor.from_llm(llm)
 compression_retriever = ContextualCompressionRetriever(base_compressor=compressor, base_retriever=retriever)
 
