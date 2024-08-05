@@ -16,7 +16,7 @@ load_dotenv()
 OPEN_API_KEY = st.secrets["DB_TOKEN"]
 
 # Streamlit app title
-st.title("Compliance Measures QA System")
+st.title("Fintech DB QA System")
 
 # Function to fetch data from the API
 # Load data and create index
@@ -27,7 +27,7 @@ index_creator = VectorstoreIndexCreator(embedding=embeddings)
 docsearch = index_creator.from_loaders([loader])
 
 
-llm = ChatOpenAI(openai_api_key=OPEN_API_KEY, model_name="gpt-3.5-turbo", temperature=0)
+llm = ChatOpenAI(openai_api_key=OPEN_API_KEY, model_name="gpt-3.5-turbo", temperature=0.0)
 compressor = LLMChainExtractor.from_llm(llm)
 #compression_retriever = ContextualCompressionRetriever(base_compressor=compressor, base_retriever=retriever)
 
